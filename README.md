@@ -7,3 +7,21 @@ Google "markdown syntax", grab the first link, paste URL below
 https://daringfireball.net/projects/markdown/syntax
 
 To save in Nano, Control + X, Y for yes, Enter
+
+I vim'd
+Do you even vim, bro?
+
+vim commands:
+i is insert
+escape to stop inserting
+:wq is quit with save
+:quit! is force quit without save
+
+to get out, hit escape, then type colon :
+either with wq or quit!
+
+A First Level Header
+====================
+
+A Second Level Header
+---------------------
