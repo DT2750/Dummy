@@ -26,6 +26,8 @@ A First Level Header
 A Second Level Header
 ---------------------
 
+------------------------------------------------------------------------------
+
 Phrase Emphasis :
 
 Some of these words *are emphasized*.
@@ -33,3 +35,23 @@ Some of these words _are emphasized also_.
 
 Use two asterisks for **strong emphasis**.
 Or, if you prefer, __use two underscores instead__.
+
+------------------------------------------------------------------------------
+
+Lists :
+
+Unordered (bulleted) lists use asterisks, pluses, and hyphens (*, +, and -) as list markers. These three markers are interchangable; this:
+
+*   Candy.
+*   Gum.
+*   Booze.
+this:
+
++   Candy.
++   Gum.
++   Booze.
+and this:
+
+-   Candy.
+-   Gum.
+-   Booze.
