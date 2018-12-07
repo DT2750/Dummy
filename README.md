@@ -20,6 +20,8 @@ escape to stop inserting
 to get out, hit escape, then type colon :
 either with wq or quit!
 
+------------------------------------------------------------------------------
+
 A First Level Header
 ====================
 
@@ -55,3 +57,14 @@ and this:
 -   Candy.
 -   Gum.
 -   Booze.
+
+------------------------------------------------------------------------------
+
+Links :
+
+LINKS
+Markdown supports two styles for creating links: inline and reference. With both styles, you use square brackets to delimit the text you want to turn into a link.
+
+Inline-style links use parentheses immediately after the link text. For example:
+
+This is an [example link](http://example.com/).
