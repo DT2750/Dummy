@@ -1,3 +1,5 @@
+// https://github.com/JamesWClark/Dummy/blob/master/main.js
+
 var chrispbacon;
 var feed = [];
 var numBacon = 10;
