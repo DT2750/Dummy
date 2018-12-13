@@ -3,25 +3,28 @@
 var chrispbacon;
 var feed = [];
 var numBacon = 10;
-
-var a = [1, 2, 3];
+var score = 0;
 
 function setup() {
-    createCanvas(740, 480);
+    createCanvas(1050, 600);
     chrispbacon = new Piggy();
-    
-    for(var i = 0; i < numBacon; i++) {
-        feed.push(new Bacon(random(width), random(height)));
+    for (var i = 0; i < numBacon; i++) {
+        feed.push(new Food(random(width), random(height)));
     }
 }
-
-function draw() {
-    background('#FFFAED');
-    chrispbacon.display();
     
-    for(var i = 0; i < feed.length; i++) {
+function draw() {
+    background(255, 250, 237);
+    chrispbacon.display();
+    for (var i = 0; i < feed.length; i++) {
         feed[i].display();
     }
+
+    fill(0);
+    textSize(50);
+    text("Piggy Paradise!", 0, 50);
+    textSize(25);
+    text("Score : " + score, 0, 100);
 }
 
 function mousePressed() {
@@ -29,66 +32,104 @@ function mousePressed() {
 }
 
 function Food(x, y) {
+    this.x = x;
+    this.y = y;
+    this.foodSize = 100;
     
+    this.display = function() {
+        fill('#8B0000');
+        rect(this.x, this.y, 100, 50);
+        fill('#FBD16C');
+        rect(this.x + 10, this.y + 10, 80, 5);
+        rect(this.x + 10, this.y + 25, 80, 5);
+        rect(this.x + 10, this.y + 40, 80, 5);
+    }
 }
+
+function Piggy() {
+    var x = mouseX;
+    var y = mouseY;
+    var diameter = 200;
     
-    //face
-    noStroke();
-    fill('#FFB6C1');
-    ellipse(x, y, 300, 200);
+    this.getDistance = function (other) {
+        var dist = Math.sqrt(Math.pow(x - other.x, 2) + Math.pow(y - other.y, 2));
+        return dist;
+    }
     
-    //nose
-    fill('#FBD16C');
-    ellipse(x, y+30, 64, 64);
-    fill("#000000");
-    ellipse(x-15, y+20, 20, 20);
-    ellipse(x+15, y+20, 20, 20);
+    this.eat = function() {
+        for (var i = feed.length - 1; i >= 0; i--) {
+            var food = feed[i];
+            var d = this.getDistance(food);
+            var r1 = food.foodSize / 2;
+            var r2 = diameter / 2;
+            if (r1 + r2 > d) {
+                scoreboard();
+                diameter = 200;
+                feed.splice(i, 1);
+                feed.push(new Food(random(width), random(height)));
+            }
+        }
+    }
     
-    //eyeLeft
-    fill('#FFFFFF');
-    ellipse(x+42, y-26, 64, 64);
+    this.display = function() {
+        
+        x = mouseX;
+        y = mouseY;
+        
+        //face
+        noStroke();
+        fill('#FFB6C1');
+        ellipse(x, y, 300, 200);
     
-    //pupilLeft
-    fill('#5ACDFE');
-    rect(x+27.5, y-37.5, 35, 35);
+        //nose
+        fill('#FBD16C');
+        ellipse(x, y+30, 64, 64);
+        fill("#000000");
+        ellipse(x-15, y+20, 20, 20);
+        ellipse(x+15, y+20, 20, 20);
     
-    //eyeRight
-    fill('#FFFFFF');
-    ellipse(x-42, y-26, 64, 64);
+        //eyeLeft
+        fill('#FFFFFF');
+        ellipse(x+42, y-26, 64, 64);
     
-    //pupilRight
-    fill('#5ACDFE');
-    rect(x-47.5, y-37.5, 35, 35);
+        //pupilLeft
+        fill('#5ACDFE');
+        rect(x+27.5, y-37.5, 35, 35);
     
-    //earLeft
-    fill('#FFB6C1');
-    push();
-    translate(x-150, y-80);
-    rotate(Math.PI / 4);
-    ellipse(0, 0, 150, 100);
-    fill('#FBD16C');
-    ellipse(0, 0, 90, 75);
-    pop();
+        //eyeRight
+        fill('#FFFFFF');
+        ellipse(x-42, y-26, 64, 64);
     
-    //earRight
-    fill('#FFB6C1');
-    push();
-    translate(x+150, y-80);
-    rotate(-Math.PI / 4);
-    ellipse(0, 0, 150, 100);
-    fill('#FBD16C');
-    ellipse(0, 0, 90, 75);
-    pop();
+        //pupilRight
+        fill('#5ACDFE');
+        rect(x-47.5, y-37.5, 35, 35);
     
-    //tongue
-    fill('#EE3E36');
-    arc(x-10, y+80, 40, 70, 0, PI+QUARTER_PI, CHORD);
+        //earLeft
+        fill('#FFB6C1');
+        push();
+        translate(x-150, y-80);
+        rotate(Math.PI / 4);
+        ellipse(0, 0, 150, 100);
+        fill('#FBD16C');
+        ellipse(0, 0, 90, 75);
+        pop();
     
-    //bacon
-    fill('#8B0000');
-    rect(400, 400, 200, 50);
-    fill('#FBD16C');
-    rect(410, 410, 180, 5);
-    rect(410, 425, 180, 5);
-    rect(410, 440, 180, 5);
+        //earRight
+        fill('#FFB6C1');
+        push();
+        translate(x+150, y-80);
+        rotate(-Math.PI / 4);
+        ellipse(0, 0, 150, 100);
+        fill('#FBD16C');
+        ellipse(0, 0, 90, 75);
+        pop();
+    
+        //tongue
+        fill('#EE3E36');
+        arc(x-10, y+80, 40, 70, 0, PI+QUARTER_PI, CHORD);
+    }
+    
+    function scoreboard() {
+        score++;
+    }
 }
